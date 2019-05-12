@@ -3,28 +3,28 @@ import Swapi_service from '../../services/Swapi_service';
 import Spinner from '../Spinner';
 import Error from '../Error';
 import BreakAppButton from '../BreakAppButton';
-import './person_details.css';
+import './itemDetails.css';
 
-export default class Person_details extends Component {
+export default class ItemDetails extends Component {
 
     swapiService = new Swapi_service();
 
     state = {
-        person: null,
+        item: null,
         loading: true,
         error: false
     }
     updatePerson = () => {
-        const {personId} = this.props;
-        if (!personId) {
+        const {id} = this.props;
+        if (!id) {
             return;
         }
         ;
         this.swapiService
-            .getPerson(personId)
-            .then((person) => {
+            .getPerson(id)
+            .then((item) => {
                 this.setState({
-                    person,
+                    item,
                     loading: false
                 })
             })
@@ -42,7 +42,7 @@ export default class Person_details extends Component {
     }
 
     componentDidUpdate(prevProps) {
-        if (this.props.personId !== prevProps.personId) {
+        if (this.props.id !== prevProps.id) {
             this.updatePerson();
             this.setState({
                 loading: true
@@ -51,24 +51,24 @@ export default class Person_details extends Component {
     }
 
     render() {
-        const {person, loading, error} = this.state;
+        const {item, loading, error} = this.state;
         const showingData = !(error || loading);
         const errorMessage = error ? <Error message={'info was destroyed by agents'}/> : null;
         const spiner = loading ? <Spinner/> : null;
-        const showPerson = showingData ? <ShowPerson person={person}/> : null;
+        const showItem = showingData ? <ShowItem item={item}/> : null;
 
         return (
             <div className='person_details jumbotron rounded d-flex'>
                 {errorMessage}
                 {spiner}
-                {showPerson}
+                {showItem}
             </div>
         )
     }
 }
 
-const ShowPerson = ({person}) => {
-    const {id, name, gender, birth_year, eye_color} = person;
+const ShowItem = ({item}) => {
+    const {id, name, gender, birth_year, eye_color} = item;
 
     return (
         <React.Fragment>

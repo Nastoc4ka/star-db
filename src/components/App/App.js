@@ -5,7 +5,7 @@ import Row from '../PeoplePage';
 import BreakAppButton from '../BreakAppButton';
 import Item_list from '../Item_list';
 import Error from '../Error';
-import Person_details from '../Person_details';
+import ItemDetails from '../ItemDetails';
 import Swapi_service from '../../services/Swapi_service';
 
 
@@ -51,17 +51,7 @@ export default class App extends Component {
                                renderItem={(item) => item.name}/>
                 </div>
                 <div className='col-md-6'>
-                    <Person_details personId={this.state.item}/>
-                </div>
-            </div>
-            <div className='peoplePage row'>
-                <div className='col-md-6'>
-                    <Item_list showPersonDetail={this.showPersonDetail}
-                               data={this.swapiService.getAllPlanet}
-                               renderItem={(item) => item.name}/>
-                </div>
-                <div className='col-md-6'>
-                    <Person_details personId={this.state.item}/>
+                    <ItemDetails id={this.state.item}/>
                 </div>
             </div>
         </div>
