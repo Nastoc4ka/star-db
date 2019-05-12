@@ -1,7 +1,7 @@
 import React, {Component} from "react";
 import App_header from '../App_header';
 import Random_planet from '../Random_planet';
-import PeoplePage from '../PeoplePage';
+import Row from '../PeoplePage';
 import BreakAppButton from '../BreakAppButton';
 import Item_list from '../Item_list';
 import Error from '../Error';
@@ -43,7 +43,7 @@ export default class App extends Component {
                 Update random planet
             </button>
             <BreakAppButton/>
-            <PeoplePage/>
+            <Row/>
             <div className='peoplePage row'>
                 <div className='col-md-6'>
                     <Item_list showPersonDetail={this.showPersonDetail}

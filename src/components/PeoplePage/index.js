@@ -1,3 +1,3 @@
-import PeoplePage from './PeoplePage';
+import Row from './PeoplePage';
 
-export default PeoplePage;
+export default Row;
