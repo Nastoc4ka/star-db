@@ -1,0 +1,9 @@
+.app_header {
+
+}
+
+.app_header ul li {
+    list-style: none;
+    margin-left: 70px;
+    margin-top: 20px;
+}
