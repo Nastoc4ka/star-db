@@ -1,5 +1,5 @@
 import React, {Component} from "react";
-import ItemDetails from '../ItemDetails';
+import ItemDetails, {Record} from '../ItemDetails/ItemDetails';
 import Item_list from '../Item_list';
 import ErrorBoundry from '../ErrorBoundry';
 import Row from '../Row';
@@ -15,23 +15,29 @@ export default class PeoplePage extends Component {
         item: 5
     }
 
-    showPersonDetail = (id) => {
+    showItemDetail = (id) => {
         this.setState({
             item: id
         })
     }
 
     render() {
-        const itemList = <Item_list showPersonDetail={this.showPersonDetail}
-                                    data={this.swapiService.getAllPeople}
-                                    renderItem={(i) => (`${i.name} (${i.gender}, ${i.birth_year})`)}/>;
+        const itemList = <Item_list showItemDetail={this.showItemDetail}
+                                    getData={this.swapiService.getAllPeople}
+                                    renderItem={(i) => (i.name)}/>;
         const personDetails = (
             <ErrorBoundry>
-                <ItemDetails id={this.state.item}/>
+                <ItemDetails id={this.state.item}
+                             dataItem={this.swapiService.getPerson}
+                             image={this.swapiService.getPersonImage}>
+                    <Record field='birth_year' label='Birth year'/>
+                    <Record field='eye_color' label='Eye color'/>
+                </ItemDetails>
             </ErrorBoundry>
         );
         return (
-            <Row left={itemList} right={personDetails}/>
+            <Row left={itemList}
+                 right={personDetails}/>
         )
     }
 }

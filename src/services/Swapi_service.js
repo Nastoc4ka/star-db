@@ -1,30 +1,44 @@
 export default class Swapi_service {
 
     _mainSwapi = 'https://swapi.co/api';
+    _mainImage = 'https://starwars-visualguide.com/assets/img/';
+
     getAllPeople = async () => {
         const res = await this.getResponse(`/people/`);
         return res.results.map(this.transformPerson);
-    }
+    };
     getPerson = async (id) => {
         const person = await this.getResponse(`/people/${id}`);
         return this.transformPerson(person);
-    }
+    };
+    getPersonImage = (id) => {
+        console.log(id);
+        return `${this._mainImage}characters/${id}.jpg`
+    };
     getAllPlanet = async () => {
         const res = await this.getResponse(`/planets/`);
         return res.results.map(this.transformPlanet);
-    }
+    };
     getPlanet = async (id) => {
         const planet = await this.getResponse(`/planets/${id}`);
         return this.transformPlanet(planet);
-    }
+    };
+    getPlanetImage = (id) => {
+        console.log(id);
+        return `${this._mainImage}planet/${id}.jpg`
+    };
     getAllShips = async () => {
         const res = await this.getResponse(`/starships/`);
         return res.results.map(this.transformShip);
-    }
+    };
     getShip = async (id) => {
         const ship = await this.getResponse(`/starships/${id}`);
         return this.transformShip(ship);
-    }
+    };
+    getShipImage = (id) => {
+        console.log(id);
+        return `${this._mainImage}starships/${id}.jpg`
+    };
     transformPlanet = (planet) => {
         const id = this.idExtract(planet);
         return {
@@ -34,7 +48,7 @@ export default class Swapi_service {
             rotation_period: planet.rotation_period,
             diameter: planet.diameter
         }
-    }
+    };
     transformShip = (ship) => {
         return {
             id: this.idExtract(ship),
@@ -47,7 +61,7 @@ export default class Swapi_service {
             passengers: ship.passengers,
             cargoCapacity: ship.cargo_capacity
         }
-    }
+    };
     transformPerson = (person) => {
         return {
             id: this.idExtract(person),
@@ -56,7 +70,7 @@ export default class Swapi_service {
             birth_year: person.birth_year,
             eye_color: person.eye_color
         }
-    }
+    };
 
     async getResponse(url) {
         const res = await fetch(`${this._mainSwapi}${url}`);

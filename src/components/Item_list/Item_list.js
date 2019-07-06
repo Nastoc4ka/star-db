@@ -1,65 +1,31 @@
-import React, {Component} from 'react';
-import Spinner from '../Spinner';
-import Swapi_service from '../../services/Swapi_service';
-import Error from '../Error';
+import React from 'react';
 import './item_list.css';
+import With_data from '../HOC_helper';
+import Swapi_service from "../../services/Swapi_service";
 
-export default class Item_list extends Component {
+const Item_list = (props) => {
 
-    state = {
-        items: null,
-        error: false
+    const {data, renderItem, showItemDetail} = props;
 
-    }
-    renderItems = (arr) => {
-        if (!arr) {
-            return
-        }
-        return arr.map((item) => {
-            const {id} = item;
-            const label = this.props.renderItem(item);
-
-            return (
-                <li className='list-group-item' key={id} onClick={() => {
-                    this.props.showPersonDetail(id)
-                }}>
-                    {label}
-                </li>
-            )
-        })
-    };
-    errorInfo = () => {
-        this.setState({
-            error: true
-        })
-    };
-
-    componentDidMount() {
-
-        const {data} = this.props;
-
-        data().then((items) => {
-            this.setState({
-                items
-            })
-        })
-            .catch(this.errorInfo)
-    }
-
-    render() {
-        const {items, error} = this.state;
-        console.log(items);
-        if (error) {
-            return <Error message={'secret information'}/>
-        }
-        const itemsToShow = this.renderItems(items);
-        if (!items) {
-            return <Spinner/>
-        }
+    const itemsToShow = data.map((item) => {
+        const {id} = item;
+        const label = renderItem(item);
 
         return (
-            <ul className='item_list list-group'>{itemsToShow}</ul>
+            <li className='list-group-item' key={id} onClick={() => {
+                showItemDetail(id)
+            }}>
+                {label}
+            </li>
         )
-    }
-}
+    });
 
+    return (
+        <ul className='item_list list-group'>{itemsToShow}</ul>
+    )
+
+};
+
+const {getAllPeople} = new Swapi_service();
+
+export default With_data(Item_list, getAllPeople);

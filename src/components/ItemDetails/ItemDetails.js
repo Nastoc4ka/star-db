@@ -2,8 +2,20 @@ import React, {Component} from 'react';
 import Swapi_service from '../../services/Swapi_service';
 import Spinner from '../Spinner';
 import Error from '../Error';
-import BreakAppButton from '../BreakAppButton';
 import './itemDetails.css';
+
+const Record = ({item, field, label}) => {
+    return (
+        <li className='list-group-item'>
+            <span>{label}</span>
+            <span>{item[field]}</span>
+        </li>
+    );
+};
+
+export {
+    Record
+};
 
 export default class ItemDetails extends Component {
 
@@ -11,25 +23,26 @@ export default class ItemDetails extends Component {
 
     state = {
         item: null,
+        image: null,
         loading: true,
         error: false
     }
-    updatePerson = () => {
-        const {id} = this.props;
-        if (!id) {
+
+    updateItem = () => {
+        const {id, dataItem, image} = this.props;
+        if (!id || !dataItem) {
             return;
         }
-        ;
-        this.swapiService
-            .getPerson(id)
-            .then((item) => {
-                this.setState({
-                    item,
-                    loading: false
-                })
+        const imageURL = image(id);
+        dataItem(id).then((item) => {
+            this.setState({
+                item,
+                image: imageURL,
+                loading: false
             })
-            .catch(this.errorInfo)
+        }).catch(this.errorInfo)
     };
+
     errorInfo = () => {
         this.setState({
             error: true,
@@ -38,12 +51,12 @@ export default class ItemDetails extends Component {
     };
 
     componentDidMount() {
-        this.updatePerson();
+        this.updateItem();
     }
 
     componentDidUpdate(prevProps) {
         if (this.props.id !== prevProps.id) {
-            this.updatePerson();
+            this.updateItem();
             this.setState({
                 loading: true
             })
@@ -51,11 +64,13 @@ export default class ItemDetails extends Component {
     }
 
     render() {
-        const {item, loading, error} = this.state;
+        const {item, image, loading, error} = this.state;
+        //console.log(item);
         const showingData = !(error || loading);
         const errorMessage = error ? <Error message={'info was destroyed by agents'}/> : null;
         const spiner = loading ? <Spinner/> : null;
-        const showItem = showingData ? <ShowItem item={item}/> : null;
+        const showItem = showingData ?
+            <ShowItem item={item} image={image} recordChildren={this.props.children}/> : null;
 
         return (
             <div className='person_details jumbotron rounded d-flex'>
@@ -67,31 +82,22 @@ export default class ItemDetails extends Component {
     }
 }
 
-const ShowItem = ({item}) => {
-    const {id, name, gender, birth_year, eye_color} = item;
+const ShowItem = ({item, image, recordChildren}) => {
+    const {name} = item;
 
     return (
         <React.Fragment>
-            <img className='person-image' src={`https://starwars-visualguide.com/assets/img/characters/${id}.jpg`}/>
+            <img className='person-image' src={image}/>
             <div className='person-info'>
                 <h4>{name}</h4>
                 <ul className='list-group list-group-flush'>
-                    <li className='list-group-item'>
-                        <span>Gendar</span><span>{gender}</span>
-                    </li>
-                    <li className='list-group-item'>
-                        <span>Birth year</span><span>{birth_year}</span>
-                    </li>
-                    <li className='list-group-item'>
-                        <span>Eye color</span><span>{eye_color}</span>
-                    </li>
-                    <li className='list-group-item'>
-                        <BreakAppButton/>
-                    </li>
+                    {
+                        React.Children.map(recordChildren, (child) => React.cloneElement(child, {item}))
+                    }
                 </ul>
             </div>
         </React.Fragment>
 
     )
-}
+};
 
