@@ -1,3 +1,7 @@
 import With_data from './With_data';
+import With_SwapiService from './With_SwapiService';
 
-export default With_data;
+export {
+    With_data,
+    With_SwapiService
+}

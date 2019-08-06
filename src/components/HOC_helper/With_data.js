@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import Spinner from '../Spinner';
 import Error from '../Error';
 
-const With_data = (ViewItemList, getData) => {
+const With_data = (ViewItemList) => {
     return class extends Component {
 
         state = {
@@ -15,10 +15,8 @@ const With_data = (ViewItemList, getData) => {
                 error: true
             })
         };
-
         componentDidMount() {
-
-            getData().then((data) => {
+            this.props.getData().then((data) => {
                 this.setState({
                     data
                 })
@@ -29,7 +27,6 @@ const With_data = (ViewItemList, getData) => {
         render() {
             console.log(this.props);
             const {data, error} = this.state;
-            console.log(data);
             if (error) {
                 return <Error message={'secret information'}/>
             }

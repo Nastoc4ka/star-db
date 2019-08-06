@@ -29,12 +29,10 @@ export default class ItemDetails extends Component {
     }
 
     updateItem = () => {
-        const {id, dataItem, image} = this.props;
-        if (!id || !dataItem) {
-            return;
-        }
-        const imageURL = image(id);
-        dataItem(id).then((item) => {
+        const {itemId, dataItem, image} = this.props;
+        console.log(itemId);
+        const imageURL = image(itemId);
+        dataItem(itemId).then((item) => {
             this.setState({
                 item,
                 image: imageURL,

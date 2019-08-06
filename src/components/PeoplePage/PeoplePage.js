@@ -24,7 +24,7 @@ export default class PeoplePage extends Component {
     render() {
         const itemList = <Item_list showItemDetail={this.showItemDetail}
                                     getData={this.swapiService.getAllPeople}
-                                    renderItem={(i) => (i.name)}/>;
+                                    renderItem={(i) => i.name}/>;
         const personDetails = (
             <ErrorBoundry>
                 <ItemDetails id={this.state.item}
