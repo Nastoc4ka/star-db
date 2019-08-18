@@ -16,6 +16,6 @@ const mapMathodsToProps = (swapiService) => {
         dataItem: swapiService.getPerson,
         image: swapiService.getPersonImage
     }
-}
+};
 
 export default With_SwapiService(PersonDetails, mapMathodsToProps);

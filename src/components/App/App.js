@@ -17,6 +17,7 @@ export default class App extends Component {
     swapiService = new Swapi_service();
 
     state = {
+        id: 11,
         randomPlanet: true,
         hasError: false
     };
@@ -26,19 +27,23 @@ export default class App extends Component {
             randomPlanet: !this.state.randomPlanet
         })
     };
+    showItemDetail = (id) => {
+        this.setState({
+            id
+        })
+    };
 
     componentDidCatch() {
-        //console.log('componentDidCatch()');
         this.setState({hasError: true});
-    }
+    };
 
     render() {
         if (this.state.hasError) {
             return <Error message={'something gone wrong!'}/>
         }
         const randomPlanetShow = this.state.randomPlanet ? <Random_planet/> : null;
-        const personList = <PersonList/>;
-        const personDetails = <PersonDetails itemId={11}/>;
+        const personList = <PersonList showItemDetail={this.showItemDetail}/>;
+        const personDetails = <PersonDetails itemId={this.state.id}/>;
 
         return <ErrorBoundry>
             <SwapiServiceProvider value={this.swapiService}>
@@ -54,7 +59,7 @@ export default class App extends Component {
                     <PlanetList/>
                     <StarShipList/>
                     <PlanetDetails itemId={4}/>
-                    <PersonDetails itemId={11}/>
+                    <PersonDetails itemId={this.state.id}/>
                     <StarShipDetails itemId={10}/>
                 </div>
             </SwapiServiceProvider>

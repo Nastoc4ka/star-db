@@ -11,7 +11,7 @@ const Row = ({left, right}) => {
             {right}
         </div>
     </div>)
-}
+};
 
 export default Row
 

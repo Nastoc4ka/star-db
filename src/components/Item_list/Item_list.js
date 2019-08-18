@@ -2,9 +2,7 @@ import React from 'react';
 import './item_list.css';
 
 const Item_list = (props) => {
-
     const {data, showItemDetail, children: renderItem} = props;
-    console.log(props);
     const itemsToShow = data.map((item) => {
         const {id} = item;
         const label = renderItem(item);

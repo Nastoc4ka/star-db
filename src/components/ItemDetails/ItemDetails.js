@@ -30,7 +30,6 @@ export default class ItemDetails extends Component {
 
     updateItem = () => {
         const {itemId, dataItem, image} = this.props;
-        console.log(itemId);
         const imageURL = image(itemId);
         dataItem(itemId).then((item) => {
             this.setState({
@@ -53,7 +52,7 @@ export default class ItemDetails extends Component {
     }
 
     componentDidUpdate(prevProps) {
-        if (this.props.id !== prevProps.id) {
+        if (this.props.itemId !== prevProps.itemId) {
             this.updateItem();
             this.setState({
                 loading: true
@@ -63,7 +62,6 @@ export default class ItemDetails extends Component {
 
     render() {
         const {item, image, loading, error} = this.state;
-        //console.log(item);
         const showingData = !(error || loading);
         const errorMessage = error ? <Error message={'info was destroyed by agents'}/> : null;
         const spiner = loading ? <Spinner/> : null;

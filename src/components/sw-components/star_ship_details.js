@@ -3,7 +3,6 @@ import ItemDetails, {Record} from '../ItemDetails/ItemDetails';
 import {With_SwapiService} from '../HOC_helper';
 
 const StarShipDetails = (props) => {
-    console.log(props);
     return (
         <ItemDetails {...props}>
             <Record field='model' label='Model'/>
@@ -18,6 +17,6 @@ const mapMathodsToProps = (swapiService) => {
         dataItem: swapiService.getShip,
         image: swapiService.getShipImage
     }
-}
+};
 
 export default With_SwapiService(StarShipDetails, mapMathodsToProps);

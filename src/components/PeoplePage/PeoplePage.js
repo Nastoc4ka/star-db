@@ -13,13 +13,13 @@ export default class PeoplePage extends Component {
 
     state = {
         item: 5
-    }
+    };
 
     showItemDetail = (id) => {
         this.setState({
             item: id
         })
-    }
+    };
 
     render() {
         const itemList = <Item_list showItemDetail={this.showItemDetail}

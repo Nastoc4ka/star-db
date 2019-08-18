@@ -25,7 +25,6 @@ const With_data = (ViewItemList) => {
         }
 
         render() {
-            console.log(this.props);
             const {data, error} = this.state;
             if (error) {
                 return <Error message={'secret information'}/>
