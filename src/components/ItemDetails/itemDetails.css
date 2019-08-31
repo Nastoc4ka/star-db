@@ -1,22 +1,22 @@
-.person_details img {
+.item_details img {
     border-radius: 5%;
     height: 150px;
 }
 
-.person-info {
+.item-info {
     margin-left: 20px;
 }
 
-.person_details {
+.item_details {
     margin-left: 20px;
 }
 
-.person_details ul li {
+.item_details ul li {
     padding-bottom: 5px;
     padding-top: 0px;
 }
 
-.person_details ul li span {
+.item_details ul li span {
     margin-left: 10px;
     margin-bottom: 0px;
 }

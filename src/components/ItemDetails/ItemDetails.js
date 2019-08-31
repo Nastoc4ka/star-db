@@ -69,7 +69,7 @@ export default class ItemDetails extends Component {
             <ShowItem item={item} image={image} recordChildren={this.props.children}/> : null;
 
         return (
-            <div className='person_details jumbotron rounded d-flex'>
+            <div className='item_details jumbotron rounded d-flex'>
                 {errorMessage}
                 {spiner}
                 {showItem}
@@ -83,8 +83,8 @@ const ShowItem = ({item, image, recordChildren}) => {
 
     return (
         <React.Fragment>
-            <img className='person-image' src={image}/>
-            <div className='person-info'>
+            <img alt={`show ${name}`} className='item-image' src={image}/>
+            <div className='item-info'>
                 <h4>{name}</h4>
                 <ul className='list-group list-group-flush'>
                     {

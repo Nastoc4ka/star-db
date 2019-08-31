@@ -1,13 +1,10 @@
 import React, {Component} from "react";
-import App_header from '../App_header';
-import Random_planet from '../Random_planet';
+import AppHeader from '../AppHeader';
+import RandomPlanet from '../RandomPlanet';
 import BreakAppButton from '../BreakAppButton';
 import Error from '../Error';
 import Swapi_service from '../../services/Swapi_service';
-import Row from '../Row';
-
-import {PersonDetails, PersonList, PlanetDetails, PlanetList, StarShipDetails, StarShipList} from '../sw-components';
-
+import {PeoplePage, PlanetsPage, StarShipsPage} from '../Pages';
 import {SwapiServiceProvider} from "../Swapi_service_context";
 import './app.css';
 import ErrorBoundry from "../ErrorBoundry";
@@ -17,7 +14,6 @@ export default class App extends Component {
     swapiService = new Swapi_service();
 
     state = {
-        id: 11,
         randomPlanet: true,
         hasError: false
     };
@@ -25,11 +21,6 @@ export default class App extends Component {
     showRandomPlanet = () => {
         this.setState({
             randomPlanet: !this.state.randomPlanet
-        })
-    };
-    showItemDetail = (id) => {
-        this.setState({
-            id
         })
     };
 
@@ -41,26 +32,23 @@ export default class App extends Component {
         if (this.state.hasError) {
             return <Error message={'something gone wrong!'}/>
         }
-        const randomPlanetShow = this.state.randomPlanet ? <Random_planet/> : null;
-        const personList = <PersonList showItemDetail={this.showItemDetail}/>;
-        const personDetails = <PersonDetails itemId={this.state.id}/>;
+        const randomPlanetShow = this.state.randomPlanet ? <RandomPlanet intervalOfPlanetUpdate={10000}/> : null;
 
         return <ErrorBoundry>
             <SwapiServiceProvider value={this.swapiService}>
                 <div className='app container'>
-                    <App_header/>
+                    <AppHeader/>
                     {randomPlanetShow}
                     <button type="button" className="btn btn-success" onClick={this.showRandomPlanet}>
                         Update random planet
                     </button>
+
                     <BreakAppButton/>
-                    <Row left={personList} right={personDetails}/>
-                    <PersonList/>
-                    <PlanetList/>
-                    <StarShipList/>
-                    <PlanetDetails itemId={4}/>
-                    <PersonDetails itemId={this.state.id}/>
-                    <StarShipDetails itemId={10}/>
+
+                    <PeoplePage/>
+                    <StarShipsPage/>
+                    <PlanetsPage/>
+
                 </div>
             </SwapiServiceProvider>
         </ErrorBoundry>

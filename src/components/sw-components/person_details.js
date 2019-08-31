@@ -18,4 +18,4 @@ const mapMathodsToProps = (swapiService) => {
     }
 };
 
-export default With_SwapiService(PersonDetails, mapMathodsToProps);
+export default With_SwapiService(mapMathodsToProps)(PersonDetails);

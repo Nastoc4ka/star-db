@@ -1,7 +1,7 @@
 import React from 'react';
 import './app_header.css';
 
-const App_header = () => {
+const AppHeader = () => {
     return (
         <div className='app_header d-flex'>
             <h1>Star DB</h1>
@@ -21,5 +21,5 @@ const App_header = () => {
     )
 };
 
-export default App_header;
+export default AppHeader;
 

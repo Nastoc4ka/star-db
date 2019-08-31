@@ -2,7 +2,9 @@ import React from 'react';
 import './item_list.css';
 
 const Item_list = (props) => {
+
     const {data, showItemDetail, children: renderItem} = props;
+
     const itemsToShow = data.map((item) => {
         const {id} = item;
         const label = renderItem(item);
@@ -21,5 +23,8 @@ const Item_list = (props) => {
     )
 
 };
-
+Item_list.defaultProps = {
+    showItemDetail: () => {
+    }
+};
 export default Item_list
