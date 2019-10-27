@@ -1,5 +1,6 @@
 import React from 'react';
 import './item_list.css';
+import PropTypes from "prop-types";
 
 const Item_list = (props) => {
 
@@ -27,4 +28,11 @@ Item_list.defaultProps = {
     showItemDetail: () => {
     }
 };
+
+Item_list.propTypes = {
+    showItemDetail: PropTypes.func,
+    data: PropTypes.arrayOf(PropTypes.object).isRequired,
+    children: PropTypes.func.isRequired
+};
+
 export default Item_list

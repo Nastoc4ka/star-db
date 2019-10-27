@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import PropTypes from 'prop-types';
 import Swapi_service from '../../services/Swapi_service';
 import Spinner from '../Spinner';
 import Error from '../Error';
@@ -11,16 +12,17 @@ export default class RandomPlanet extends Component {
     };
 
     static propTypes = {
-        intervalOfPlanetUpdate: (props, propName, componentName) => { //props = this.props;
-            // propName = intervalOfPlanetUpdate; componentName = RandomPlanet
-            const value = props[propName];
-            if (typeof value === 'number' && !isNaN(value)) {
-                return null;
-            }
-            ;
-
-            return new TypeError(`${componentName}: ${propName} must be a number!`);
-        }
+        // intervalOfPlanetUpdate: (props, propName, componentName) => { //props = this.props;
+        //     // propName = intervalOfPlanetUpdate; componentName = RandomPlanet
+        //     const value = props[propName];
+        //     if (typeof value === 'number' && !isNaN(value)) {
+        //         return null;
+        //     }
+        //     ;
+        //
+        //     return new TypeError(`${componentName}: ${propName} must be a number!`);
+        // }
+        intervalOfPlanetUpdate: PropTypes.number
     };
 
     swapiService = new Swapi_service();

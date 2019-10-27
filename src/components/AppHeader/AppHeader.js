@@ -1,5 +1,6 @@
 import React from 'react';
 import './app_header.css';
+import {Link} from 'react-router-dom';
 
 const AppHeader = () => {
     return (
@@ -7,13 +8,13 @@ const AppHeader = () => {
             <h1>Star DB</h1>
             <ul className='d-flex '>
                 <li>
-                    <a href="#">People</a>
+                    <Link to='/people'>People</Link>
                 </li>
                 <li>
-                    <a href="#">Planets</a>
+                    <Link to='/planets'>Planets</Link>
                 </li>
                 <li>
-                    <a href="#">Starships</a>
+                    <Link to='/starShips'>Starships</Link>
                 </li>
 
             </ul>

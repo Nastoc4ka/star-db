@@ -8,6 +8,7 @@ import {PeoplePage, PlanetsPage, StarShipsPage} from '../Pages';
 import {SwapiServiceProvider} from "../Swapi_service_context";
 import './app.css';
 import ErrorBoundry from "../ErrorBoundry";
+import {BrowserRouter as Router, Route} from 'react-router-dom';
 
 export default class App extends Component {
 
@@ -36,20 +37,22 @@ export default class App extends Component {
 
         return <ErrorBoundry>
             <SwapiServiceProvider value={this.swapiService}>
-                <div className='app container'>
-                    <AppHeader/>
-                    {randomPlanetShow}
-                    <button type="button" className="btn btn-success" onClick={this.showRandomPlanet}>
-                        Update random planet
-                    </button>
+                <Router>
+                    <div className='app container'>
+                        <AppHeader/>
+                        {randomPlanetShow}
+                        <button type="button" className="btn btn-success" onClick={this.showRandomPlanet}>
+                            Update random planet
+                        </button>
 
-                    <BreakAppButton/>
+                        <BreakAppButton/>
 
-                    <PeoplePage/>
-                    <StarShipsPage/>
-                    <PlanetsPage/>
+                        <Route path='/people' component={PeoplePage}/>
+                        <Route path='/planets' component={PlanetsPage}/>
+                        <Route path='/starShips' component={StarShipsPage}/>
 
-                </div>
+                    </div>
+                </Router>
             </SwapiServiceProvider>
         </ErrorBoundry>
 
